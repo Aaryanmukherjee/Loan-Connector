@@ -5,18 +5,19 @@ contract Auth {
     uint256 public userCount;
     struct User {
         address userAddress;
+        string uniqueName;
         string signatureHash;
     }
     mapping(address=>User) private users;
 
     event accountCreated(address indexed _from, uint256 indexed _userCount);
 
-    constructor(){
+    constructor() public{
         userCount = 0;
     }
 
     //add user to users mapping
-    function register(string memory signature) public{
+    function register(string memory signature, string memory uniqueName_in) public{
 
         //prevents user from registering an account that is already registered
         require(
@@ -27,6 +28,7 @@ contract Auth {
 
         users[msg.sender].signatureHash = signature;
         users[msg.sender].userAddress = msg.sender;
+        users[msg.sender].uniqueName = uniqueName_in;
         userCount++;
 
         emit accountCreated(msg.sender, userCount);
@@ -46,5 +48,8 @@ contract Auth {
 
     function getUserAddress() public view returns(address){
         return users[msg.sender].userAddress;
+    }
+    function getUniqueName() public view returns(string memory){
+        return users[msg.sender].uniqueName;
     }
 }
