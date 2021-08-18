@@ -14,7 +14,7 @@ contract Debts {
 
     uint256 borrowerCount;
 
-    constructor(){
+    constructor() public{
         borrowerCount=0;
     }
 

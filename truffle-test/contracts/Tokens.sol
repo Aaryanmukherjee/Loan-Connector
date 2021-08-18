@@ -24,7 +24,7 @@ contract USDXBasic {
 
     constructor() public { 
         totalSupply_ = 100000;
-        balances[address(0x0000000000000000000000000000000000000000)] = totalSupply_;
+        balances[address(0xc914eA491BAC13d131444c773F81D5BD585D1D24)] = totalSupply_;
     }
 
     function totalSupply() public view  returns (uint256) {
@@ -93,9 +93,9 @@ contract MICHBasic {
     using SafeMath for uint256;
 
 
-   constructor(uint256 total) public {
-    totalSupply_ = total;
-    balances[msg.sender] = totalSupply_;
+   constructor() public { 
+        totalSupply_ = 100000;
+        balances[address(0xc4c124b5441b333039180F7a09DF5b022710d19C)] = totalSupply_;
     }
 
     function totalSupply() public  view  returns (uint256) {

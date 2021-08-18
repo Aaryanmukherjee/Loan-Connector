@@ -9,6 +9,9 @@ import React, {useState, useEffect} from 'react';
 
 import web3Connection from './getWeb3';
 import AuthContract from './contracts/AuthContract';
+import USDXBasicContract from './contracts/USDXBasicContract';
+import DebtsContract from './contracts/DebtsContract';
+
 
 
 
@@ -19,19 +22,28 @@ function App() {
   const [account, setAccount] = useState(null);
   const [balance, setBalance] = useState(null);
   const [_web3, _setWeb3] = useState(null);
-  const [_authContract, _setAuthContract] = useState(null);
   const [loggedIn,setLoggedIn] = useState(false);
   const [uniqueName, setUniqueName] = useState("");
+
+  const [_authContract, _setAuthContract] = useState(null);
+  const [_USDXBasicContract, _setUSDXBasicContract] = useState(null);
+  const [_debtsContract, _setDebtsContract] = useState(null);
+
   //look into creating states for other contracts
 
   useEffect(async ()=>{
       try {
         const web3 = await web3Connection();
         const authContract = await AuthContract(web3);
+        const usdxBasicContract = await USDXBasicContract(web3);
+        const debtsContract = await DebtsContract(web3);
         const accounts = await web3.eth.getAccounts();
       
         _setWeb3(web3);
         _setAuthContract(authContract);
+        _setUSDXBasicContract(usdxBasicContract);
+        _setDebtsContract(debtsContract);
+
         setAccount(accounts[0]);
         await web3.eth.getBalance(accounts[0], (err, balance) => {
           if (!err) {
