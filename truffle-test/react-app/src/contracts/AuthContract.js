@@ -1,14 +1,14 @@
-import AuthABI from "./AuthABI.json";
-import Auth from "../../../build/contracts/Auth.json"
+// import AuthABI from "./AuthABI.json";
+import Auth from "./Auth.json"
 
 
 const AuthContract = async (web3) => {
 
     const networkId = await web3.eth.net.getId();
-    const deployedNetwork = Authentication.networks[networkId];
+    const deployedNetwork = Auth.networks[networkId];
 
     return new web3.eth.Contract(
-        Authentication.abi,
+        Auth.abi,
         deployedNetwork.address
     );
     
