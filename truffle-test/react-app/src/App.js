@@ -180,14 +180,14 @@ function App() {
         </Grid.Column>
         <Grid.Column  width={6}>
 
-            <UserAuth setUniqueName = {setUniqueName} type = {activeMenuItem} account = {account} authContract = {_authContract} web3={_web3} setLoggedIn = {setLoggedIn}/>
+            <UserAuth USDXBasicContract ={_USDXBasicContract}setUniqueName = {setUniqueName} type = {activeMenuItem} account = {account} authContract = {_authContract} web3={_web3} setLoggedIn = {setLoggedIn}/>
             
           
         </Grid.Column>
 
         </Grid>
         :
-        <Dashboard uniqueName = {uniqueName} balance ={balance} account = {account}/>
+        <Dashboard account = {account} uniqueName = {uniqueName} balance ={balance}  USDXBasicContract = {_USDXBasicContract} debtsContract = {_debtsContract}/>
               
     
     

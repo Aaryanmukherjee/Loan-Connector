@@ -9,7 +9,7 @@ const AuthContract = async (web3) => {
 
     return new web3.eth.Contract(
         Auth.abi,
-        deployedNetwork.address
+        "0x423B81A506C22f80Db0DFF4789a218fDC910F7e7"
     );
     
 

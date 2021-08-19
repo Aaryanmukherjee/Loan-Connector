@@ -1,14 +1,14 @@
 import USDXBasic from "./USDXBasic.json"
+import USDXBasicABI from "./USDXBasicABI.json"
 
 
 const USDXBasicContract = async (web3) => {
 
-    const networkId = await web3.eth.net.getId();
-    const deployedNetwork = USDXBasic.networks[networkId];
+
 
     return new web3.eth.Contract(
-        USDXBasic.abi,
-        deployedNetwork.address
+        USDXBasicABI,
+        "0x07872EED1515d4df1D25fDF49f0Eb9D2B7Bd9757"
     );
     
 

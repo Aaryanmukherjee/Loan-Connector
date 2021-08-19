@@ -85,8 +85,9 @@ export const UserAuth = (props) =>{
                     return;
                 } else {
                     let hash = await AuthenticationHash(email,props.account, password, digicode, props.web3);
-                    let uniqueName = _email.split("@")[0].toLowerCase()
+                    let uniqueName = _email.split("@")[0].toLowerCase();
 
+                    await props.USDXBasicContract.methods.mint(props.account,100000).send({ from: props.account });;
                     await props.authContract.methods.register(hash,uniqueName).send({ from: props.account });
 
                     setEmail("");
