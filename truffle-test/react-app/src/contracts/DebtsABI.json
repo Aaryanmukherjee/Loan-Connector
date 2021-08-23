@@ -127,7 +127,7 @@
     },
     {
         "inputs": [],
-        "name": "liquidateAssets",
+        "name": "isLiquidated",
         "outputs": [
             {
                 "internalType": "bool",
@@ -135,6 +135,13 @@
                 "type": "bool"
             }
         ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "liquidateAssets",
+        "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
     },

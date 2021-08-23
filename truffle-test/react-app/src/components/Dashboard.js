@@ -34,7 +34,7 @@ export const Dashboard = (props) =>{
 
     const refreshCards = async () =>{
         const debtObj = await debtsContract.methods.getDebt().call({from:props.account},(error,result)=>{
-            console.log(error);
+            // console.log(error);
         })
         setDebt(debtObj);
 
@@ -58,9 +58,12 @@ export const Dashboard = (props) =>{
 
         // const test = await debtsContract.methods.testFunction().call({from: props.account});
         // console.log(test);
+        // await debtsContract.methods.initBorrower( 10000, 10, 10000, 10).send({from: props.account});
+
         await debtsContract.methods.initBorrower( Math.floor(100/collateralFactor * parseInt(borrowAmount)), collateralFactor, parseInt(borrowAmount), borrowRate).send({from: props.account},(error,result)=>{
-            console.log(error);
+            // console.log(error);
         });
+
         const debtObj = await debtsContract.methods.getDebt().call({from:props.account},(error,result)=>{
             console.log(error);
         })
@@ -68,7 +71,7 @@ export const Dashboard = (props) =>{
         
 
         await USDXBasicContract.methods.approveFromPool(props.account, borrowAmount).send({from: props.account},(error,result)=>{
-            console.log(error,result)
+            // console.log(error,result)
         });
         const balance_ = await USDXBasicContract.methods.balanceOf(props.account).call({from:props.account},(error,result)=>{
             console.log(result)
@@ -93,7 +96,7 @@ export const Dashboard = (props) =>{
     const repayOnSubmitHandler = async () =>{
         await debtsContract.methods.repay(repayAmount).send({from:props.account});
         const debtObj = await debtsContract.methods.getDebt().call({from:props.account},(error,result)=>{
-            console.log(error);
+            // console.log(error);
         })
         setDebt(debtObj);
         setRepayAmount("");
@@ -107,19 +110,21 @@ export const Dashboard = (props) =>{
             }
             
         }, 1000);
-        if(counter===0){
+        if(counter === 0){
             
             await debtsContract.methods.incrementAmountOwed().send({from:props.account});
-            let liquidated = await debtsContract.methods.liquidateAssets().send({from:props.account}).then(function(result){
-                console.log(result)
-            });
+            await debtsContract.methods.liquidateAssets().send({from:props.account});
+            const liquidated = await debtsContract.methods.isLiquidated().call({from:props.account});
+
             if(liquidated){
                 await USDXBasicContract.methods.approveFromPool(props.account, 0).send({from:props.account});
+                
                 
                 refreshCards();
             }else{
                 
                 refreshCards();
+                setCounter(10);
             }
             
 

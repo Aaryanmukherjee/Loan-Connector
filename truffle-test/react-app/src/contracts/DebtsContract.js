@@ -9,7 +9,7 @@ const DebtsContract = async (web3) => {
 
     return new web3.eth.Contract(
         DebtsABI,
-        "0x4594158c07346A1a68FA0047Fe81dcC7435142A8"
+        "0xebeFB7d3f645ab515B7474b24A32C835b023A1E7"
     );
     
 
